@@ -46,6 +46,13 @@ if ['app_master', 'app', 'solo'].include? node['instance_role']
     source "newrelic.cfg.erb"
   end
   
+  directory "/var/log/newrelic" do
+    action :create
+    recursive true
+    owner 'root'
+    group 'root'
+  end
+  
   node[:applications].each do |app, data|
     file = Chef::Util::FileEdit.new("/data/#{app}/shared/config/fpm-pool.conf")
     file.insert_line_if_no_match("/php_value[newrelic.appname] = \"#{app}\"/", "php_value[newrelic.appname] = \"#{app}\"")
