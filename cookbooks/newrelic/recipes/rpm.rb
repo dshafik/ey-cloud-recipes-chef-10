@@ -4,8 +4,8 @@ end
 
 if ['app_master', 'app', 'solo'].include? node['instance_role']
   # Download newrelic PHP at specified version
-  remote_file "#{Chef::Config['file_cache_path']}newrelic-php5-#{node['newrelicrpm']['rpm_version']}-linux.tar.gz" do
-    source "http://download.newrelic.com/php_agent/archive/#{node['newrelicrpm']['rpm_version']}/newrelic-php5-#{node['newrelicrpm']['rpm_version']}-linux.tar.gz"
+  remote_file "#{Chef::Config['file_cache_path']}newrelic-php5-#{node[:newrelic][:rpm_version]}-linux.tar.gz" do
+    source "http://download.newrelic.com/php_agent/archive/#{node[:newrelic][:rpm_version]}/newrelic-php5-#{node[:newrelic][:rpm_version]}-linux.tar.gz"
     action :create_if_missing
   end
   
@@ -19,8 +19,8 @@ if ['app_master', 'app', 'solo'].include? node['instance_role']
     code <<-EOH
       export NR_INSTALL_SILENT='true'
       export NR_INSTALL_KEY="#{nr_key}"
-      gzip -dc newrelic-php5-#{node['newrelicrpm']['rpm_version']}-linux.tar.gz | tar xf -
-      cd newrelic-php5-#{node['newrelicrpm']['rpm_version']}-linux
+      gzip -dc newrelic-php5-#{node[:newrelic][:rpm_version]}-linux.tar.gz | tar xf -
+      cd newrelic-php5-#{node[:newrelic][:rpm_version]}-linux
       ./newrelic-install install
     EOH
     action :run
