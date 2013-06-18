@@ -1,0 +1,1 @@
+newrelic :server_monitoring_version => "1.1.2.124", :rpm_version => "3.6.5.178"
