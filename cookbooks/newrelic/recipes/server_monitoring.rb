@@ -1,4 +1,4 @@
-ey_cloud_report "new relic - server monitoring #{newrelic_license_key}" do
+ey_cloud_report "new relic - server monitoring" do
   message "New Relic - Server Monitoring"
 end
 
